@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { PlaneFactory, type Plane } from './Plane.js'
+import { PlaneFactory } from './Plane.js'
 
 describe('PlaneFactory', () => {
   beforeEach(() => {

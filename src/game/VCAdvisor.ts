@@ -1,4 +1,4 @@
-import { BiasAnalysis } from './BiasEngine.js'
+import { type BiasAnalysis } from './BiasEngine.js'
 
 export interface VCQuote {
   text: string
@@ -61,7 +61,7 @@ export class VCAdvisor {
     return stories[Math.floor(Math.random() * stories.length)]
   }
 
-  static generateFailureExcuse(crashCount: number): string {
+  static generateFailureExcuse(_crashCount: number): string {
     const excuses = [
       "Those pilots clearly didn't understand the vision.",
       "They probably deviated from the recommended flight path.",

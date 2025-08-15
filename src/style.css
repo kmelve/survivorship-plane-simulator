@@ -1,11 +1,26 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Aviation-themed color palette */
+  --bg-primary: #1a1f2e;
+  --bg-secondary: #2d3748;
+  --bg-tertiary: #4a5568;
+  --text-primary: #f7fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #a0aec0;
+  
+  --accent-primary: #4299e1;
+  --accent-success: #48bb78;
+  --accent-warning: #ed8936;
+  --accent-danger: #f56565;
+  
+  --border-color: #4a5568;
+  --shadow: rgba(0, 0, 0, 0.3);
+
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,84 +28,702 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, #2a4365 100%);
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
+  min-height: 100vh;
+}
+
+/* Game Layout */
+.game-layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.game-header {
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px var(--shadow);
+}
+
+.game-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title-main {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.title-sub {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: -0.2rem;
+}
+
+.phase-indicator {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.phase-btn {
+  padding: 0.5rem 1rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.phase-btn:hover:not(:disabled) {
+  background: var(--accent-primary);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.phase-btn.active {
+  background: var(--accent-primary);
+  color: white;
+  font-weight: 600;
+}
+
+.phase-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Game Content */
+.game-content {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
   padding: 2rem;
+  min-height: calc(100vh - 80px);
+}
+
+.main-content {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Tutorial View */
+.tutorial-view {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tutorial-content h2 {
+  color: var(--accent-primary);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #3178c6aa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
+.tutorial-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-tertiary);
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border-left: 4px solid var(--accent-primary);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.tutorial-section h3 {
+  color: var(--accent-primary);
+  margin-top: 0;
+}
+
+.tutorial-section ol {
+  padding-left: 1.5rem;
+}
+
+.tutorial-section li {
+  margin-bottom: 0.5rem;
+}
+
+.start-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 2rem auto;
+  display: block;
+}
+
+.start-btn:hover {
+  background: #3182ce;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+}
+
+/* Analysis View */
+.analysis-view h2 {
+  color: var(--accent-primary);
+  margin-bottom: 0.5rem;
+}
+
+.analysis-header p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.analysis-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.plane-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.plane-card {
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  transition: all 0.2s;
+}
+
+.plane-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.plane-card.crashed {
+  border-color: var(--accent-danger);
+  background: rgba(245, 101, 101, 0.1);
+}
+
+.plane-diagram {
+  margin-bottom: 1rem;
+}
+
+.plane-info {
+  text-align: center;
+}
+
+.plane-id {
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.plane-type {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.damage-count {
+  font-size: 0.8rem;
+  color: var(--accent-warning);
+}
+
+/* Damage visualization */
+.damage-point.light {
+  opacity: 0.7;
+}
+
+.damage-point.medium {
+  opacity: 0.9;
+}
+
+.damage-point.heavy {
+  opacity: 1;
+}
+
+/* Armor Placement */
+.armor-placement-section h3 {
+  color: var(--accent-success);
+  margin-bottom: 1rem;
+}
+
+.armor-canvas {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px dashed var(--border-color);
+}
+
+.armor-canvas svg {
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+}
+
+.armor-piece {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.armor-piece:hover {
+  stroke-width: 3;
+  filter: brightness(1.2);
+}
+
+.armor-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-armor-btn {
+  background: var(--accent-danger);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clear-armor-btn:hover {
+  background: #e53e3e;
+}
+
+.armor-count {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Mission View */
+.mission-view h2 {
+  color: var(--accent-primary);
+  margin-bottom: 2rem;
+}
+
+.mission-params {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.param-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.param-group label {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.param-group select {
+  padding: 0.75rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.armor-summary {
+  background: var(--bg-tertiary);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.armor-summary h3 {
+  margin-top: 0;
+  color: var(--accent-success);
+}
+
+.warning {
+  color: var(--accent-warning);
+  font-weight: 600;
+}
+
+.launch-btn {
+  background: var(--accent-success);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.launch-btn:hover {
+  background: #38a169;
+  transform: translateY(-2px);
+}
+
+/* Mission Active */
+.mission-active {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.mission-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--accent-primary);
+  border-radius: 50%;
+  margin: 2rem auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Results View */
+.results-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.result-stat {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.stat-number.survivors {
+  color: var(--accent-success);
+}
+
+.stat-number.casualties {
+  color: var(--accent-danger);
+}
+
+.stat-label {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.results-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.analyze-again-btn,
+.reveal-truth-btn {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.analyze-again-btn {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.reveal-truth-btn {
+  background: var(--accent-warning);
+  color: white;
+}
+
+/* Graveyard View */
+.graveyard-view h2 {
+  color: var(--accent-danger);
+  margin-bottom: 1rem;
+}
+
+.bias-explanation {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(245, 101, 101, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-danger);
+}
+
+.bias-explanation em {
+  color: var(--accent-danger);
+  font-weight: 600;
+}
+
+.crashed-planes h3 {
+  color: var(--accent-danger);
+}
+
+.plane-gallery.graveyard .plane-card {
+  filter: grayscale(0.7);
+}
+
+.correct-analysis {
+  background: var(--bg-tertiary);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.correct-analysis h3 {
+  color: var(--accent-success);
+  margin-top: 0;
+}
+
+.lesson {
+  background: var(--bg-tertiary);
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  border-left: 4px solid var(--accent-primary);
+}
+
+.lesson h3 {
+  color: var(--accent-primary);
+  margin-top: 0;
+}
+
+.reset-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 2rem auto;
+  display: block;
+}
+
+/* VC Advisor */
+.vc-advisor {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.advisor-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.advisor-avatar {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.advisor-info h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.advisor-info p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.confidence-meter {
+  margin-bottom: 1.5rem;
+}
+
+.confidence-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.confidence-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-danger), var(--accent-warning), var(--accent-success));
+  transition: width 0.5s ease;
+}
+
+.confidence-value {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.quote-display blockquote {
+  margin: 0;
+  padding: 1rem;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-primary);
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.quote-context {
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* Quick Stats */
+.quick-stats {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px var(--shadow);
+}
+
+.quick-stats h3 {
+  margin-top: 0;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+}
+
+.stat-item .stat-number {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.stat-item .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .game-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  a:hover {
-    color: #747bff;
+  
+  .sidebar {
+    order: -1;
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .analysis-content {
+    grid-template-columns: 1fr;
   }
+  
+  .mission-params {
+    grid-template-columns: 1fr;
+  }
+  
+  .results-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .game-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .phase-indicator {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .game-content {
+    padding: 1rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .plane-gallery {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* No planes message */
+.no-planes {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2rem;
+  font-style: italic;
 }

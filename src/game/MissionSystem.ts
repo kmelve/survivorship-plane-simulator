@@ -1,4 +1,4 @@
-import { Plane, PlaneFactory, DamagePoint } from './Plane.js'
+import { type Plane, PlaneFactory, type DamagePoint } from './Plane.js'
 import { BiasEngine } from './BiasEngine.js'
 
 export interface Mission {

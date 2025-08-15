@@ -1,4 +1,4 @@
-import { Plane, DamagePoint } from './Plane.js'
+import { type Plane } from './Plane.js'
 
 export interface BiasAnalysis {
   armorRecommendations: ArmorPlacement[]
